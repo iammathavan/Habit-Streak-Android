@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Enter Habit Name"
+        />
+
+    <EditText
+        android:id="@+id/editTextHabitName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Habit Name"
+        android:inputType="text"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Enter Habit Description"
+        />
+
+    <EditText
+        android:id="@+id/editTextHabitDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Habit Description"
+        android:inputType="text"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        />
+
+
+</LinearLayout>

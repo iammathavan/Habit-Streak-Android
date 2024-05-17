@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "854689759813",
+    "project_id": "habitapp-bcd54",
+    "storage_bucket": "habitapp-bcd54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854689759813:android:8b3f7d0e0eddfabe1cd92c",
+        "android_client_info": {
+          "package_name": "com.example.habitapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLDYLq5sbuMJnxuF928QXlZBEMqMFp2oI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
