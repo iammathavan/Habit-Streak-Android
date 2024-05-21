@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database.reference
         val currentUserID = FirebaseAuth.getInstance().currentUser?.uid
 
-
+        
 
         //Display the User currently logged in at top
         currentUserID?.let{uid->
@@ -71,41 +71,8 @@ class MainActivity : AppCompatActivity() {
                     if (userName != null){
                         userNameTextView.text = "$userName" + "'s Habits"
                     }
-                    //val today = LocalDate.now()
-                    //val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
-                    val today = LocalDate.of(2024, 5, 15)
-                    val lastLogin = LocalDate.of(2024, 5, 14)
-                    Log.d("Ronaldo", "${snapshot.child("userinfo")}")
 
-                    if (today > lastLogin){
-                        for (snap in snapshot.child("habits").children){
-                            if (today == lastLogin!!.plusDays(1)){
-                                updateScore(snap, userRef.child("habits"))
-                                updateStreak(snap, userRef.child("habits"), true)
-                                resetCompletion(snap, userRef.child("habits"))
-                            }else{
-                                updateScore(snap, userRef.child("habits"))
-                                updateStreak(snap, userRef.child("habits"), false)
-                                resetCompletion(snap, userRef.child("habits"))
-                            }
-                        }
-                        //val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
-                        //userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO()
-
-                }
-
-            })
-
-
-            userRef.child("habits").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (snap in snapshot.children){
+                    for (snap in snapshot.child("habits").children){
                         val habitID = snap.child("id").getValue(String::class.java)
                         val habitName = snap.child("name").getValue(String::class.java)
                         val habitDesc = snap.child("description").getValue(String::class.java)
@@ -120,14 +87,44 @@ class MainActivity : AppCompatActivity() {
                     }
                     habitAdapter = HabitAdapter(habitList, userRef.child("habits"))
                     recyclerViewHabits.adapter = habitAdapter
+
+                    Log.d("Ronaldo", "Uh??")
+
+
+                    val today = LocalDate.of(2024, 5, 16)
+                    val lastLogin = LocalDate.of(2024, 5, 14)
+
+                    if (today > lastLogin){
+                        for (i in 0..<habitList.size){
+                            if (today == lastLogin!!.plusDays(1)){
+                                updateScore(habitList.get(i), userRef.child("habits"))
+                                updateStreak(habitList.get(i), userRef.child("habits"), true)
+                                resetCompletion(habitList.get(i), userRef.child("habits"))
+                            }else{
+                                updateScore(habitList.get(i), userRef.child("habits"))
+                                updateStreak(habitList.get(i), userRef.child("habits"), false)
+                                resetCompletion(habitList.get(i), userRef.child("habits"))
+                            }
+                        }
+                    }
+
+                    for (i in 0..<habitList.size){
+                        Log.d("Ronaldo", "OOk $i")
+                        Log.d("Ronaldo", "${habitList.get(i)}")
+                    }
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    TODO()
+
                 }
 
             })
+
         }
+
+
 
 
         floatingActionButton.setOnClickListener {
@@ -138,34 +135,38 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun resetCompletion(snap: DataSnapshot, userHabitRef: DatabaseReference) {
-        val id = snap.child("id").getValue(String::class.java)
+    private fun resetCompletion(habit: Habit, userHabitRef: DatabaseReference) {
+        val id = habit.id
         userHabitRef.child(id!!).child("completion").setValue(false)
+        habit.completion = false
     }
 
-    private fun updateStreak(snap: DataSnapshot, userHabitRef: DatabaseReference, isConsecutiveLogIn: Boolean) {
-        val completion = snap.child("completion").getValue(Boolean::class.java)
-        val id = snap.child("id").getValue(String::class.java)
+    private fun updateStreak(habit: Habit, userHabitRef: DatabaseReference, isConsecutiveLogIn: Boolean) {
+        val completion = habit.completion
+        val id = habit.id
 
         if (isConsecutiveLogIn && completion == true){
-            var streak = snap.child("streak").getValue(Int::class.java)
+            var streak = habit.streak
             streak = streak?.plus(1)
             userHabitRef.child(id!!).child("streak").setValue(streak)
+            habit.streak = streak
         }else{
             userHabitRef.child(id!!).child("streak").setValue(0)
+            habit.streak = 0
         }
     }
 
-    private fun updateScore(snap: DataSnapshot, userHabitRef: DatabaseReference){
-        val completion = snap.child("completion").getValue(Boolean::class.java)
+    private fun updateScore(habit: Habit, userHabitRef: DatabaseReference){
+        val completion = habit.completion
 
         if (completion == true){
-            val score = snap.child("score").getValue(Int::class.java)
-            val streak = snap.child("streak").getValue(Int::class.java)
+            val score = habit.score
+            val streak = habit.streak
             val updatedScore = (score?.plus((1.5 * streak!!)))!!.toInt() + 10
-            val id = snap.child("id").getValue(String::class.java)
+            val id = habit.id
 
             userHabitRef.child(id!!).child("score").setValue(updatedScore)
+            habit.score = updatedScore
         }
 
     }
