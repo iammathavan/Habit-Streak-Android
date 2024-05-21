@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editTextHabitName: EditText
     private lateinit var editTextHabitDescription: EditText
 
+    private var habitList : MutableList<Habit> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,15 +71,15 @@ class MainActivity : AppCompatActivity() {
                     if (userName != null){
                         userNameTextView.text = "$userName" + "'s Habits"
                     }
-                    val today = LocalDate.now()
-                    val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
+                    //val today = LocalDate.now()
+                    //val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
+                    val today = LocalDate.of(2024, 5, 15)
+                    val lastLogin = LocalDate.of(2024, 5, 14)
                     Log.d("Ronaldo", "${snapshot.child("userinfo")}")
 
-                    for (snap in snapshot.child("habits").children){
-                        Log.d("Ronaldo", "Ok -> ${snap}")
-                        if (today > lastLogin){
+                    if (today > lastLogin){
+                        for (snap in snapshot.child("habits").children){
                             if (today == lastLogin!!.plusDays(1)){
-                                //Log.d("Ronaldo", "${snapshot.child("habits")} vs ${userRef.child("habits")}")
                                 updateScore(snap, userRef.child("habits"))
                                 updateStreak(snap, userRef.child("habits"), true)
                                 resetCompletion(snap, userRef.child("habits"))
@@ -87,21 +89,22 @@ class MainActivity : AppCompatActivity() {
                                 resetCompletion(snap, userRef.child("habits"))
                             }
                         }
+                        //val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
+                        //userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
                     }
-                    val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
-                    userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     TODO()
+
                 }
 
             })
 
-            userRef.child("habits").addValueEventListener(object : ValueEventListener {
+
+            userRef.child("habits").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val habitList = mutableListOf<Habit>()
                     for (snap in snapshot.children){
                         val habitID = snap.child("id").getValue(String::class.java)
                         val habitName = snap.child("name").getValue(String::class.java)
@@ -112,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                         val habitStartDate = getDateFromDB(snap.child("startDate"))
 
                         val habit = Habit(habitID, habitName, habitStartDate, habitStreak, habitScore, habitDesc, habitCompletion)
+                        Log.d("Ronaldo", "Let's see $snap")
                         habit.let { habitList.add(it) }
                     }
                     habitAdapter = HabitAdapter(habitList, userRef.child("habits"))
@@ -220,6 +224,8 @@ class MainActivity : AppCompatActivity() {
             habitID?.let {
                 habitRef.child(it).setValue(habit)
                     .addOnSuccessListener {
+                        habitList.add(habit)
+                        habitAdapter.notifyItemInserted(habitList.size - 1)
                         Toast.makeText(this, "Habit added successfully!", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener{
