@@ -9,5 +9,5 @@ data class Habit(
     var streak: Int? = 0,
     var score: Int? = 0,
     val description: String? = null,
-    val completion: Boolean? = false
+    var completion: Boolean? = false
 )
