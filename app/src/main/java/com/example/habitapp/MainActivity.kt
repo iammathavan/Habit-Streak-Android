@@ -82,18 +82,15 @@ class MainActivity : AppCompatActivity() {
                         val habitStartDate = getDateFromDB(snap.child("startDate"))
 
                         val habit = Habit(habitID, habitName, habitStartDate, habitStreak, habitScore, habitDesc, habitCompletion)
-                        Log.d("Ronaldo", "Let's see $snap")
                         habit.let { habitList.add(it) }
                     }
                     habitAdapter = HabitAdapter(habitList, userRef.child("habits"))
                     recyclerViewHabits.adapter = habitAdapter
 
-                    Log.d("Ronaldo", "Uh??")
 
 
-                    val today = LocalDate.of(2024, 5, 16)
-                    val lastLogin = LocalDate.of(2024, 5, 14)
-
+                    val today = LocalDate.now()
+                    val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
                     if (today > lastLogin){
                         for (i in 0..<habitList.size){
                             if (today == lastLogin!!.plusDays(1)){
@@ -106,11 +103,8 @@ class MainActivity : AppCompatActivity() {
                                 resetCompletion(habitList.get(i), userRef.child("habits"))
                             }
                         }
-                    }
-
-                    for (i in 0..<habitList.size){
-                        Log.d("Ronaldo", "OOk $i")
-                        Log.d("Ronaldo", "${habitList.get(i)}")
+                        val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
+                        userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
                     }
 
                 }
