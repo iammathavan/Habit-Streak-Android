@@ -17,7 +17,7 @@
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="User's Habits" />
+        android:text="Your Habits" />
 
 
 

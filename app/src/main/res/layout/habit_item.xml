@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.75"
+            android:layout_weight="0.82"
             android:orientation="vertical">
 
             <TextView
@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingTop="5dp"
                 android:gravity="center_vertical">
 
                 <CheckBox
@@ -50,16 +51,29 @@
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
                     android:foregroundTint="@color/darkgreen"
-                    android:paddingRight="30dp"
+                    android:layout_weight="1"
                     android:text="Completion" />
 
                 <TextView
                     android:id="@+id/textViewScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:text="Score: 0"
+                    android:layout_toRightOf="@id/checkBoxCompleted"
+                    android:layout_weight="1"
                     android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/deleteHabitBtn"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:paddingLeft="45dp"
+                    android:layout_toRightOf="@id/textViewScore"
+                    android:background="@drawable/trash"
+                    android:layout_marginRight="5dp"
+                    />
+
+
             </LinearLayout>
         </LinearLayout>
 
@@ -67,7 +81,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.25"
+            android:layout_weight="0.18"
             android:orientation="vertical"
             android:gravity="center_vertical">
 
@@ -85,7 +99,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:text="Streak: 0"
-                android:paddingTop="5dp"
+                android:paddingTop="7dp"
                 android:textSize="18sp" />
         </LinearLayout>
 

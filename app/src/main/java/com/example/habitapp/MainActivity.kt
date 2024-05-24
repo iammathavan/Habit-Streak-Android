@@ -28,7 +28,6 @@ import java.time.LocalDate
 class MainActivity : AppCompatActivity() {
 
     private lateinit var floatingActionButton: FloatingActionButton
-    private lateinit var userNameTextView: TextView
     private lateinit var database: DatabaseReference
     private lateinit var recyclerViewHabits: RecyclerView
     private lateinit var habitAdapter: HabitAdapter
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         floatingActionButton = findViewById(R.id.floatingActionButton)
-        userNameTextView = findViewById(R.id.userNameTextView)
 
 
         recyclerViewHabits = findViewById(R.id.habitsRecyclerView)
@@ -66,11 +64,6 @@ class MainActivity : AppCompatActivity() {
             val userRef = database.child(uid)
             userRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-
-                    val userName = snapshot.child("userinfo").children.firstOrNull()!!.child("name").getValue(String::class.java)
-                    if (userName != null){
-                        userNameTextView.text = "$userName" + "'s Habits"
-                    }
 
                     for (snap in snapshot.child("habits").children){
                         val habitID = snap.child("id").getValue(String::class.java)
