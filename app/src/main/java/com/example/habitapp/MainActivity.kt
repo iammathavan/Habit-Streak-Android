@@ -3,6 +3,7 @@ package com.example.habitapp
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -27,10 +28,13 @@ import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var database: DatabaseReference
     private lateinit var recyclerViewHabits: RecyclerView
     private lateinit var habitAdapter: HabitAdapter
+    private lateinit var logoutBtn: Button
+    private lateinit var addHabitBtn: Button
+    private lateinit var userInfoBtn: Button
+    private lateinit var friendsBtn: Button
 
     private lateinit var editTextHabitName: EditText
     private lateinit var editTextHabitDescription: EditText
@@ -48,7 +52,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        floatingActionButton = findViewById(R.id.floatingActionButton)
+        logoutBtn = findViewById(R.id.logoutBtn)
+        addHabitBtn = findViewById(R.id.addHabitBtn)
+        userInfoBtn = findViewById(R.id.userInfoBtn)
+        friendsBtn = findViewById(R.id.friendsBtn)
 
 
         recyclerViewHabits = findViewById(R.id.habitsRecyclerView)
@@ -114,8 +121,20 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        floatingActionButton.setOnClickListener {
+        addHabitBtn.setOnClickListener {
             showAddHabitDialog(currentUserID)
+        }
+
+        logoutBtn.setOnClickListener {
+            Toast.makeText(this, "Log out Btn is clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        userInfoBtn.setOnClickListener {
+            Toast.makeText(this, "User Info Btn is clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        friendsBtn.setOnClickListener {
+            Toast.makeText(this, "Friends Btn is clicked", Toast.LENGTH_SHORT).show()
         }
 
 

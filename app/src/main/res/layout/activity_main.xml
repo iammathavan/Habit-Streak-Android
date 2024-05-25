@@ -20,29 +20,90 @@
         android:text="Your Habits" />
 
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        app:srcCompat="@drawable/plus"
-        app:backgroundTint="@color/darkgreen"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habitsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/userNameTextView"
+        android:layout_above="@id/buttonLayout"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/orange">
+
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/logout"
+            android:text="Log Out"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            />
+
+        <Button
+            android:id="@+id/addHabitBtn"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/plus"
+            android:text="Add Habit"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            />
+
+        <Button
+            android:id="@+id/userInfoBtn"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/user"
+            android:text="Info"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            />
+
+        <Button
+            android:id="@+id/friendsBtn"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/friends"
+            android:text="Friends"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:padding="5dp"
+            />
+
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
