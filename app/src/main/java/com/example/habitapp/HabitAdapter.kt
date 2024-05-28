@@ -44,7 +44,12 @@ class HabitAdapter(private val habits: MutableList<Habit>, private val database:
         holder.textViewStreakScore.text = habit.streak.toString()
         holder.checkBoxCompleted.isChecked = habit.completion!!
 
+        holder.checkBoxCompleted.setOnCheckedChangeListener(null)
+
+        holder.checkBoxCompleted.isChecked = habit.completion!!
+
         holder.checkBoxCompleted.setOnCheckedChangeListener { _, isChecked ->
+            habit.completion = isChecked
             updateCheckBoxDB(habit.id, isChecked, holder.userHabitRef)
         }
 
