@@ -1,5 +1,6 @@
 package com.example.habitapp
 
+import DataStoreManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class LogInPage : AppCompatActivity() {
 
@@ -19,6 +24,8 @@ class LogInPage : AppCompatActivity() {
     private lateinit var editTextPassword: EditText
 
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var dataStoreManager: DataStoreManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +47,12 @@ class LogInPage : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        dataStoreManager = DataStoreManager(this)
+
         buttonSignup.setOnClickListener{
             val intent = Intent(this, SignUpPage::class.java)
             startActivity(intent)
+            finish()
         }
 
         buttonLogin.setOnClickListener{
@@ -54,9 +64,21 @@ class LogInPage : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            val user = auth.currentUser
+                            val userId = user?.uid
+
+                            if (userId != null) {
+
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    dataStoreManager.setLoggedIn(true)
+                                    dataStoreManager.setUserId(userId)
+                                }.invokeOnCompletion {
+                                    val intent = Intent(this, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()

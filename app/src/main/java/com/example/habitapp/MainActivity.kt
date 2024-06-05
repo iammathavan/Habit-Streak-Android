@@ -1,6 +1,9 @@
 package com.example.habitapp
 
+import DataStoreManager
+import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -25,6 +28,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.database.getValue
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +45,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editTextHabitDescription: EditText
 
     private var habitList : MutableList<Habit> = mutableListOf()
+
+    private lateinit var dataStoreManager: DataStoreManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,83 +69,94 @@ class MainActivity : AppCompatActivity() {
         recyclerViewHabits.layoutManager = LinearLayoutManager(this)
 
         database = Firebase.database.reference
-        val currentUserID = FirebaseAuth.getInstance().currentUser?.uid
 
 
-        
-
-        //Display the User currently logged in at top
-        currentUserID?.let{uid->
-            val userRef = database.child(uid)
-            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-
-                    for (snap in snapshot.child("habits").children){
-                        val habitID = snap.child("id").getValue(String::class.java)
-                        val habitName = snap.child("name").getValue(String::class.java)
-                        val habitDesc = snap.child("description").getValue(String::class.java)
-                        val habitScore = snap.child("score").getValue(Int::class.java)
-                        val habitStreak = snap.child("streak").getValue(Int::class.java)
-                        val habitCompletion = snap.child("completion").getValue(Boolean::class.java)
-                        val habitStartDate = getDateFromDB(snap.child("startDate"))
-
-                        val habit = Habit(habitID, habitName, habitStartDate, habitStreak, habitScore, habitDesc, habitCompletion)
-                        habit.let { habitList.add(it) }
-                    }
-                    habitAdapter = HabitAdapter(habitList, userRef.child("habits"))
-                    recyclerViewHabits.adapter = habitAdapter
+        dataStoreManager = DataStoreManager(this)
 
 
 
-                    val today = LocalDate.now()
-                    val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
-                    if (today > lastLogin){
-                        for (i in 0..<habitList.size){
-                            if (today == lastLogin!!.plusDays(1)){
-                                updateScore(habitList.get(i), userRef.child("habits"))
-                                updateStreak(habitList.get(i), userRef.child("habits"), true)
-                                resetCompletion(habitList.get(i), userRef.child("habits"))
-                            }else{
-                                updateScore(habitList.get(i), userRef.child("habits"))
-                                updateStreak(habitList.get(i), userRef.child("habits"), false)
-                                resetCompletion(habitList.get(i), userRef.child("habits"))
+        lifecycleScope.launch {
+            dataStoreManager.userId.collect {
+                currentUserID ->
+                if (currentUserID != null){
+                    //Display the User currently logged in at top
+                    currentUserID?.let{uid->
+                        val userRef = database.child(uid)
+                        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                for (snap in snapshot.child("habits").children){
+                                    val habitID = snap.child("id").getValue(String::class.java)
+                                    val habitName = snap.child("name").getValue(String::class.java)
+                                    val habitDesc = snap.child("description").getValue(String::class.java)
+                                    val habitScore = snap.child("score").getValue(Int::class.java)
+                                    val habitStreak = snap.child("streak").getValue(Int::class.java)
+                                    val habitCompletion = snap.child("completion").getValue(Boolean::class.java)
+                                    val habitStartDate = getDateFromDB(snap.child("startDate"))
+
+                                    val habit = Habit(habitID, habitName, habitStartDate, habitStreak, habitScore, habitDesc, habitCompletion)
+                                    habit.let { habitList.add(it) }
+                                }
+                                habitAdapter = HabitAdapter(habitList, userRef.child("habits"))
+                                recyclerViewHabits.adapter = habitAdapter
+
+
+
+                                val today = LocalDate.now()
+                                val lastLogin = getDateFromDB(snapshot.child("userinfo").children.firstOrNull()!!.child("lastLogin"))
+                                if (today > lastLogin){
+                                    for (i in 0..<habitList.size){
+                                        if (today == lastLogin!!.plusDays(1)){
+                                            updateScore(habitList.get(i), userRef.child("habits"))
+                                            updateStreak(habitList.get(i), userRef.child("habits"), true)
+                                            resetCompletion(habitList.get(i), userRef.child("habits"))
+                                        }else{
+                                            updateScore(habitList.get(i), userRef.child("habits"))
+                                            updateStreak(habitList.get(i), userRef.child("habits"), false)
+                                            resetCompletion(habitList.get(i), userRef.child("habits"))
+                                        }
+                                    }
+                                    val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
+                                    userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
+                                }
+
                             }
-                        }
-                        val userInfoId = snapshot.child("userinfo").children.firstOrNull()!!.child("id").getValue(String::class.java)
-                        userRef.child("userinfo").child(userInfoId!!).child("lastLogin").setValue(today)
+
+                            override fun onCancelled(error: DatabaseError) {
+                                TODO()
+
+                            }
+
+                        })
+
                     }
-
+                }
+                addHabitBtn.setOnClickListener {
+                    showAddHabitDialog(currentUserID)
                 }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO()
-
+                logoutBtn.setOnClickListener {
+                    performLogout(this@MainActivity)
                 }
 
-            })
+                userInfoBtn.setOnClickListener {
+                    Toast.makeText(this@MainActivity, "Feature is coming soon", Toast.LENGTH_SHORT).show()
+                }
 
+                friendsBtn.setOnClickListener {
+                    Toast.makeText(this@MainActivity, "Feature is coming soon!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+    }
 
-
-
-
-        addHabitBtn.setOnClickListener {
-            showAddHabitDialog(currentUserID)
+    private fun performLogout(context: Context) {
+        lifecycleScope.launch {
+            dataStoreManager.clearUserData()
+            val intent = Intent(context, LogInPage::class.java)
+            startActivity(intent)
+            finish()
         }
-
-        logoutBtn.setOnClickListener {
-            Toast.makeText(this, "Log out Btn is clicked", Toast.LENGTH_SHORT).show()
-        }
-
-        userInfoBtn.setOnClickListener {
-            Toast.makeText(this, "User Info Btn is clicked", Toast.LENGTH_SHORT).show()
-        }
-
-        friendsBtn.setOnClickListener {
-            Toast.makeText(this, "Friends Btn is clicked", Toast.LENGTH_SHORT).show()
-        }
-
-
     }
 
 

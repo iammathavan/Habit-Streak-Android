@@ -48,5 +48,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 }
