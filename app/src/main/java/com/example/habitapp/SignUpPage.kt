@@ -1,5 +1,6 @@
 package com.example.habitapp
 
+import DataStoreManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,11 +10,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 
 
@@ -27,6 +33,8 @@ class SignUpPage : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+
+    private lateinit var dataStoreManager: DataStoreManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +54,8 @@ class SignUpPage : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = Firebase.database.reference
+
+        dataStoreManager = DataStoreManager(this)
 
         buttonSignup.setOnClickListener {
             val name = editTextName.text.toString()
@@ -67,10 +77,22 @@ class SignUpPage : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        updateUserInfo(name, email)
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        val user = auth.currentUser
+                        val userId = user?.uid
+
+                        if (userId != null) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                updateUserInfo(name, email)
+                                dataStoreManager.setLoggedIn(true)
+                                dataStoreManager.setUserId(userId)
+                            }.invokeOnCompletion {
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Snackbar.make(buttonSignup, "Sign-up failed: ${task.exception?.message}", Snackbar.LENGTH_LONG).show()
