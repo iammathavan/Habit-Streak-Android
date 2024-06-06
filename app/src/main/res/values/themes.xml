@@ -3,6 +3,7 @@
     <style name="Base.Theme.HabitApp" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
     <style name="Theme.HabitApp" parent="Base.Theme.HabitApp" />
