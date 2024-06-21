@@ -13,9 +13,6 @@
         android:theme="@style/Theme.HabitApp"
         tools:targetApi="31">
         <activity
-            android:name=".User_Info"
-            android:exported="false" />
-        <activity
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
