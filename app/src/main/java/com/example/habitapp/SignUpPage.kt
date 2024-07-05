@@ -10,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
@@ -19,7 +18,6 @@ import com.google.firebase.database.database
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 
 
@@ -110,9 +108,9 @@ class SignUpPage : AppCompatActivity() {
             val userInfoRef = database.child(uid).child("userinfo")
             val userInfoID = userInfoRef.push().key
 
-            val userInfo = UserInfo(userInfoID, name, email, LocalDate.now())
+            val user = User(userInfoID, name, email, LocalDate.now())
             userInfoID?.let {
-                userInfoRef.child(it).setValue(userInfo)
+                userInfoRef.child(it).setValue(user)
                     .addOnSuccessListener {
                         Toast.makeText(this, "User information added successfully!", Toast.LENGTH_SHORT).show()
                     }

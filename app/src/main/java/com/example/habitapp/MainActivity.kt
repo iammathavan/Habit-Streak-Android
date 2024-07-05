@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var habitAdapter: HabitAdapter
     private lateinit var logoutBtn: Button
     private lateinit var addHabitBtn: Button
-    private lateinit var userInfoBtn: Button
-    private lateinit var friendsBtn: Button
+    private lateinit var socialBtn: Button
 
     private lateinit var editTextHabitName: EditText
     private lateinit var editTextHabitDescription: EditText
@@ -61,8 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         logoutBtn = findViewById(R.id.logoutBtn)
         addHabitBtn = findViewById(R.id.addHabitBtn)
-        userInfoBtn = findViewById(R.id.userInfoBtn)
-        friendsBtn = findViewById(R.id.friendsBtn)
+        socialBtn = findViewById(R.id.socialBtn)
 
 
         recyclerViewHabits = findViewById(R.id.habitsRecyclerView)
@@ -139,11 +137,7 @@ class MainActivity : AppCompatActivity() {
                     performLogout(this@MainActivity)
                 }
 
-                userInfoBtn.setOnClickListener {
-                    Toast.makeText(this@MainActivity, "Feature is coming soon", Toast.LENGTH_SHORT).show()
-                }
-
-                friendsBtn.setOnClickListener {
+                socialBtn.setOnClickListener {
                     Toast.makeText(this@MainActivity, "Feature is coming soon!", Toast.LENGTH_SHORT).show()
                 }
             }
