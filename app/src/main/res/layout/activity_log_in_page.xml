@@ -60,13 +60,27 @@
         android:layout_marginTop="25dp"
         />
 
+    <TextView
+        android:id="@+id/forgotPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPassword"
+        android:text="Forgot Password?"
+        android:textColor="@color/blue"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:focusable="true" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
-        android:layout_below="@id/editTextPassword"
-        android:layout_marginTop="32dp"
+        android:layout_below="@id/forgotPasswordText"
+        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"

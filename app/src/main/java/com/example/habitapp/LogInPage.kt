@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ class LogInPage : AppCompatActivity() {
     private lateinit var buttonLogin: Button
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
+    private lateinit var forgotPasswordText: TextView
 
     private lateinit var auth: FirebaseAuth
 
@@ -44,6 +46,7 @@ class LogInPage : AppCompatActivity() {
         buttonLogin = findViewById(R.id.buttonLogin)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
+        forgotPasswordText = findViewById(R.id.forgotPasswordText)
 
         auth = FirebaseAuth.getInstance()
 
@@ -86,6 +89,11 @@ class LogInPage : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "Please enter email address and password correctly", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        forgotPasswordText.setOnClickListener {
+            val intent = Intent(this, ResetPassword::class.java)
+            startActivity(intent)
         }
 
     }
