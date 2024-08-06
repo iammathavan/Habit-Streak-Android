@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.inappmessaging.display)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -52,4 +53,6 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
+    implementation("com.google.firebase:firebase-bom:33.1.2")
 }

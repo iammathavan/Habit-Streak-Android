@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FAF8ED</color>
-    <color name="orange">#F9B572</color>
-    <color name="lightgreen">#99B080</color>
-    <color name="darkgreen">#748E63</color>
-    <color name="blue">#0F67B1</color>
+    <color name="primary">#F6E96B</color>
+    <color name="secondary">#101820</color>
+    <color name="third">#96C9F4</color>
+    <color name="forth">#387F39</color>
+    <color name="fifth">#F6F5F5</color>
 </resources>

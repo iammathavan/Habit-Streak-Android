@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/habitCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:backgroundTint="@color/orange"
+    android:backgroundTint="@color/primary"
     >
 
     <LinearLayout
+        android:id="@+id/Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -27,13 +29,16 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="24sp"
-                android:text="Habit Name" />
+                android:text="Habit Name"
+                android:textColor="@color/third"
+                />
 
             <TextView
                 android:id="@+id/textViewHabitDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="@color/third"
                 android:text="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
             <LinearLayout
@@ -49,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
                     android:button="@drawable/checkbox_selector"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/secondary" />
 
                 <TextView
                     android:id="@+id/textViewCompletion"
@@ -58,6 +63,7 @@
                     android:text="Completion"
                     android:layout_toRightOf="@id/checkBoxCompleted"
                     android:layout_weight="1"
+                    android:textColor="@color/third"
                     android:textSize="16sp" />
 
                 <TextView
@@ -67,6 +73,7 @@
                     android:text="Score: 0"
                     android:layout_toRightOf="@id/textViewCompletion"
                     android:layout_weight="1"
+                    android:textColor="@color/third"
                     android:textSize="16sp" />
 
                 <Button
@@ -103,9 +110,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="Streak: 0"
+                android:text="0"
                 android:paddingTop="7dp"
-                android:textSize="18sp" />
+                android:textColor="@color/third"
+                android:textSize="24sp" />
         </LinearLayout>
 
     </LinearLayout>

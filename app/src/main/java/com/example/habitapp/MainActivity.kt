@@ -4,6 +4,8 @@ import DataStoreManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -28,8 +31,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.database.getValue
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import android.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,6 +62,29 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Request Notification Permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            }
+        }
+
+        // Initialize Firebase Messaging
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                // Handle error
+                return@addOnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            Log.d("TOKEN_MY", token)
+        }
+
+
+
 
         logoutBtn = findViewById(R.id.logoutBtn)
         addHabitBtn = findViewById(R.id.addHabitBtn)
@@ -144,6 +172,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Handle permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                // Permission granted
+                Toast.makeText(this@MainActivity, "Notification turned on! 🔔", Toast.LENGTH_SHORT).show()
+            } else {
+                // Permission denied
+                Toast.makeText(this@MainActivity, "Enable Notification to have daily remainder to update your habits!", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     private fun performLogout(context: Context) {
         lifecycleScope.launch {
             dataStoreManager.clearUserData()
@@ -226,8 +268,8 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnShowListener {
             val positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
             val negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-            positiveButton.setTextColor(ContextCompat.getColor(this, android.R.color.black))
-            negativeButton.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+            positiveButton.setTextColor(ContextCompat.getColor(this, R.color.forth))
+            negativeButton.setTextColor(ContextCompat.getColor(this, R.color.forth))
         }
 
         dialog.show()
