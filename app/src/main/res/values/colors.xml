@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FAF8ED</color>
-    <color name="orange">#F9B572</color>
-    <color name="lightgreen">#99B080</color>
-    <color name="darkgreen">#748E63</color>
-    <color name="blue">#0F67B1</color>
+    <color name="background">#082128</color>
+    <color name="text">#D4F3FB</color>
+    <color name="primary">#58F496</color>
+    <color name="secondary">#DA3939</color>
+    <color name="secondary_light">#CE8585</color>
+    <color name="primary_light">#85D4A4</color>
+    <color name="primary_dark">#0F9443</color>
+    <color name="text_dark">#32A5C4</color>
 </resources>

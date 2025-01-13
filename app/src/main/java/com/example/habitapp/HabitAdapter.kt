@@ -2,7 +2,6 @@ package com.example.habitapp
 
 import android.app.AlertDialog
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 
@@ -24,6 +24,7 @@ class HabitAdapter(private val habits: MutableList<Habit>, private val database:
         val checkBoxCompleted: CheckBox = itemView.findViewById(R.id.checkBoxCompleted)
         val deleteHabitBtn: Button = itemView.findViewById(R.id.deleteHabitBtn)
         val userHabitRef: DatabaseReference = database
+        val cardLayout: View = itemView.findViewById(R.id.Card)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder {
@@ -44,13 +45,15 @@ class HabitAdapter(private val habits: MutableList<Habit>, private val database:
         holder.textViewStreakScore.text = habit.streak.toString()
         holder.checkBoxCompleted.isChecked = habit.completion!!
 
-        holder.checkBoxCompleted.setOnCheckedChangeListener(null)
+        updateCardColor(holder.cardLayout, habit.completion!!)
 
+        holder.checkBoxCompleted.setOnCheckedChangeListener(null)
         holder.checkBoxCompleted.isChecked = habit.completion!!
 
         holder.checkBoxCompleted.setOnCheckedChangeListener { _, isChecked ->
             habit.completion = isChecked
             updateCheckBoxDB(habit.id, isChecked, holder.userHabitRef)
+            updateCardColor(holder.cardLayout, isChecked)
         }
 
         holder.deleteHabitBtn.setOnClickListener {
@@ -66,6 +69,18 @@ class HabitAdapter(private val habits: MutableList<Habit>, private val database:
         }
 
 
+    }
+
+    private fun updateCardColor(
+        cardView: View,
+        isChecked: Boolean,
+    ) {
+        if (isChecked) {
+            cardView.setBackgroundResource(R.drawable.roundstyle_opp)
+
+        } else {
+            cardView.setBackgroundResource(R.drawable.roundstyle)
+        }
     }
 
     private fun deleteHabit(

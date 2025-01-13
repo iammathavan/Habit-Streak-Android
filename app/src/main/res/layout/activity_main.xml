@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <TextView
@@ -16,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/text"
         android:text="Your Habits" />
 
 
@@ -39,7 +38,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="10dp"
-        android:background="@color/orange">
+        android:background="@color/background">
 
 
         <Button
@@ -50,7 +49,7 @@
             android:drawableTop="@drawable/logout"
             android:text="Log Out"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textAllCaps="true"
             android:layout_weight="2"
             android:layout_marginRight="50dp"
@@ -65,7 +64,7 @@
             android:drawableTop="@drawable/plus"
             android:text="Add Habit"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textAllCaps="true"
             android:layout_weight="2"
             android:layout_marginRight="50dp"
@@ -80,7 +79,7 @@
             android:background="@drawable/roundstyle_btn"
             android:drawableTop="@drawable/multiple_users_silhouette"
             android:text="Social"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textSize="12sp"
             android:textAllCaps="true"
             android:layout_weight="2"

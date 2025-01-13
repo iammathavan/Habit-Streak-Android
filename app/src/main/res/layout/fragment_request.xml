@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- Title: Add Friends -->
+    <TextView
+        android:id="@+id/tvAddFriendsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Friends"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Enter User ID and Add Friend Button -->
+    <LinearLayout
+        android:id="@+id/addFriendContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tvAddFriendsTitle"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:background="@color/text"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etUserId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:hint="Enter User ID"
+            android:textColor="@color/background"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnPaste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/paste" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Friend"
+        android:layout_below="@id/addFriendContainer"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/roundstyle_btn"
+        android:textColor="@color/background"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:padding="12dp" />
+
+    <!-- Title: Pending Requests -->
+    <TextView
+        android:id="@+id/tvPendingRequestsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAddFriend"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:text="Pending Requests"
+        android:textColor="@color/text"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <!-- RecyclerView for Pending Requests -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPendingRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPendingRequestsTitle"
+        android:layout_marginTop="8dp" />
+
+</RelativeLayout>

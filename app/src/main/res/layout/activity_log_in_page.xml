@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:background="@color/background"
     tools:context=".LogInPage">
 
     <ImageView
@@ -26,7 +26,7 @@
         android:layout_marginTop="20dp"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/text"
         android:text="Log In"
         />
 
@@ -39,7 +39,7 @@
         android:layout_below="@id/logInView"
         android:background="@drawable/custom_edit_text"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/background"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
@@ -54,7 +54,7 @@
         android:layout_below="@id/editTextEmail"
         android:background="@drawable/custom_edit_text"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/background"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPassword"
         android:text="Forgot Password?"
-        android:textColor="@color/blue"
+        android:textColor="@color/primary"
         android:gravity="center"
         android:textSize="18sp"
         android:layout_centerHorizontal="true"
@@ -84,10 +84,9 @@
         android:layout_centerHorizontal="true"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:textColor="@color/black"
+        android:textColor="@color/background"
         android:textSize="18sp"
         android:background="@drawable/roundstyle_btn"
-        android:shadowColor="@color/black"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -100,9 +99,8 @@
         android:background="@drawable/roundstyle_btn"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:shadowColor="@color/black"
         android:text="Sign Up"
-        android:textColor="@color/black"
+        android:textColor="@color/background"
         android:textSize="18sp" />
 
 

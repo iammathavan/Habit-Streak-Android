@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/friendsHabitActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".FriendHabitsActivity">
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:text="Habits" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/habitsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/userNameTextView"
+        android:layout_above="@id/buttonLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp"
+        android:weightSum="3"
+        android:background="@color/background">
+
+
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/home"
+            android:text="Home"
+            android:padding="5dp"
+            android:textColor="@color/background"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnFriends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/roundstyle_btn"
+            android:drawableTop="@drawable/friends"
+            android:text="Friends"
+            android:padding="5dp"
+            android:textColor="@color/background"
+            android:layout_marginRight="10dp"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
