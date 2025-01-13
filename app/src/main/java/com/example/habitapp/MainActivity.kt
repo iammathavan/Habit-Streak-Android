@@ -162,11 +162,21 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 logoutBtn.setOnClickListener {
-                    performLogout(this@MainActivity)
+                    android.app.AlertDialog.Builder(this@MainActivity)
+                        .setTitle("Log Out")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton("Yes") { dialog, which ->
+                            performLogout(this@MainActivity)
+                        }
+                        .setNegativeButton("No", null)
+                        .show()
                 }
 
                 socialBtn.setOnClickListener {
-                    Toast.makeText(this@MainActivity, "Feature is coming soon!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivity, Social::class.java)
+                    intent.putExtra("USER_ID", currentUserID)
+                    startActivity(intent)
+                    finish()
                 }
             }
         }
@@ -268,8 +278,8 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnShowListener {
             val positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
             val negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-            positiveButton.setTextColor(ContextCompat.getColor(this, R.color.forth))
-            negativeButton.setTextColor(ContextCompat.getColor(this, R.color.forth))
+            positiveButton.setTextColor(ContextCompat.getColor(this, R.color.primary))
+            negativeButton.setTextColor(ContextCompat.getColor(this, R.color.primary))
         }
 
         dialog.show()

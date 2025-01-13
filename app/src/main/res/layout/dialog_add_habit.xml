@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/secondary"
+    android:background="@color/background"
     >
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/text"
         android:text="Enter Habit Name"
         />
 
@@ -25,8 +25,8 @@
         android:hint="Habit Name"
         android:inputType="text"
         android:layout_marginTop="10dp"
-        android:textColor="@color/fifth"
-        android:textColorHint="@color/forth"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text_dark"
         />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/text"
         android:text="Enter Habit Description"
         />
 
@@ -47,8 +47,8 @@
         android:hint="Habit Description"
         android:inputType="text"
         android:layout_marginTop="10dp"
-        android:textColor="@color/fifth"
-        android:textColorHint="@color/forth"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text_dark"
         />
 
 

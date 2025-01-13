@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:backgroundTint="@color/primary"
+    android:backgroundTint="@color/background"
     >
 
     <LinearLayout
@@ -30,7 +30,7 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:text="Habit Name"
-                android:textColor="@color/third"
+                android:textColor="@color/background"
                 />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/third"
+                android:textColor="@color/background"
                 android:text="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
             <LinearLayout
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
                     android:button="@drawable/checkbox_selector"
-                    android:textColor="@color/secondary" />
+                    android:textColor="@color/background" />
 
                 <TextView
                     android:id="@+id/textViewCompletion"
@@ -63,7 +63,7 @@
                     android:text="Completion"
                     android:layout_toRightOf="@id/checkBoxCompleted"
                     android:layout_weight="1"
-                    android:textColor="@color/third"
+                    android:textColor="@color/background"
                     android:textSize="16sp" />
 
                 <TextView
@@ -73,7 +73,7 @@
                     android:text="Score: 0"
                     android:layout_toRightOf="@id/textViewCompletion"
                     android:layout_weight="1"
-                    android:textColor="@color/third"
+                    android:textColor="@color/background"
                     android:textSize="16sp" />
 
                 <Button
@@ -112,7 +112,7 @@
                 android:textStyle="bold"
                 android:text="0"
                 android:paddingTop="7dp"
-                android:textColor="@color/third"
+                android:textColor="@color/background"
                 android:textSize="24sp" />
         </LinearLayout>
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friendsCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:backgroundTint="@color/background"
+    >
+
+    <LinearLayout
+        android:id="@+id/requestsCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/roundstyle_opp"
+        android:padding="16dp"
+        android:layout_margin="8dp"
+        android:weightSum="3"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            >
+
+
+            <TextView
+                android:id="@+id/tvFriendName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mathavan"
+                android:textColor="@color/background"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+            <Button
+                android:id="@+id/btnViewHabits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/roundstyle_btn_50"
+                android:padding="12dp"
+                android:text="View Habits   👀"
+                android:textSize="16sp"
+                android:textColor="@color/background" />
+
+            <Button
+                android:id="@+id/btnUnfriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/roundstyle_btn_opp"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:text="Unfriend   💔"
+                android:textColor="@color/background" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

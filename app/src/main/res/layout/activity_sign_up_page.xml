@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="@color/background"
     tools:context=".SignUpPage">
 
     <ImageView
@@ -26,7 +26,7 @@
         android:layout_marginTop="20dp"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/secondary"
+        android:textColor="@color/text"
         android:text="Sign Up"
         />
 
@@ -42,7 +42,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
-        android:textColor="@color/third"
+        android:textColor="@color/background"
         />
 
     <EditText
@@ -57,7 +57,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
-        android:textColor="@color/third"
+        android:textColor="@color/background"
         />
 
     <EditText
@@ -72,7 +72,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
-        android:textColor="@color/third"
+        android:textColor="@color/background"
         />
 
     <EditText
@@ -87,7 +87,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
-        android:textColor="@color/third"
+        android:textColor="@color/background"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -100,10 +100,9 @@
         android:layout_centerHorizontal="true"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:textColor="@color/secondary"
+        android:textColor="@color/background"
         android:textSize="18sp"
         android:background="@drawable/roundstyle_btn"
-        android:shadowColor="@color/primary"
         />
 
 
