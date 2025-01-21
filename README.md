@@ -44,7 +44,7 @@ Habit Streak is an Android mobile application designed to help users build and m
 
 
 **Log In Screen**
-![Log In Screen](https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Log%20In%20Screen.png 100x50)
+![Log In Screen](https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Log%20In%20Screen.png =30x30)
 
 
 
