@@ -17,6 +17,7 @@ Habit Streak is an Android mobile application designed to help users build and m
 - Remove Friends
 - Browse Friends' Habits
 - Reset Passwords
+- Log In Only Once
 
 ## Installation
 
@@ -59,17 +60,31 @@ Habit Streak is an Android mobile application designed to help users build and m
 
 <img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Main%20Screen.png" alt="Main Screen" width="280"/>
 
-****
+**Add a habit**
 
-<img src="" alt="" width="280"/>
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Adding%20Habit.png" alt="Adding Habit" width="280"/>
 
-****
+**View you unique ID and other information**
 
-<img src="" alt="" width="280"/>
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Your%20Info%20screen.png" alt="User Info Screen" width="280"/>
 
-****
+**Add Friends & Friends Requests**
 
-<img src="" alt="" width="280"/>
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Adding%20a%20Friend.png" alt="Adding Friends" width="280"/>
+
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/New%20Friend%20-%20add%20them%20notification.png" alt="Friend Request" width="280"/>
+
+**See all your friends**
+
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Friends%20Screen.png" alt="List of Friends" width="280"/>
+
+**See your Friends Habits**
+
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Friends%20Habits%20viewing.png" alt="Friends Habits" width="280"/>
+
+**Receive daily reminders via notification**
+
+<img src="https://github.com/iammathavan/Habit-Streak-Android/blob/master/ScreenShots/Notification.png" alt="Notification" width="280"/>
 
 
 
@@ -79,5 +94,5 @@ Habit Streak is an Android mobile application designed to help users build and m
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/iammathavan/Habit-Streak-Android/blob/master/LICENSE)
 
