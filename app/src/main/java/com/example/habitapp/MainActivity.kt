@@ -76,11 +76,6 @@ class MainActivity : AppCompatActivity() {
                 // Handle error
                 return@addOnCompleteListener
             }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            Log.d("TOKEN_MY", token)
         }
 
 
