@@ -94,7 +94,6 @@ class SignUpPage : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Snackbar.make(buttonSignup, "Sign-up failed: ${task.exception?.message}", Snackbar.LENGTH_LONG).show()
-                        //Toast.makeText(this, "Sign-up failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
         }
